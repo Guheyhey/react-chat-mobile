@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 // 链接 mongo，并使用chatApp这个集合
 const DB_URL = 'mongodb://localhost:27017/chat-app';
 mongoose.connect(DB_URL);
-mongoose.Connection.on('connected', function() {
-  console.log('mongo connect success');
-})
+// mongoose.Connection.on('connected', function() {
+//   console.log('mongo connect success');
+// })
 
 const models = {
   user: {
@@ -16,9 +16,25 @@ const models = {
     // 头像
     'avatar': {type: String},
     // 简介
-    'description': {type: String}
+    'description': {type: String},
+    // 职位
+    'title': {type: String},
+
+    // 如果是boss，还有两个字段
+    'company': {type: String},
+    'money': {type: String}
   },
   chat: {
 
+  }
+}
+
+for (let m in models) {
+  mongoose.model(m, new mongoose.Schema(models[m]))
+}
+
+module.exports = {
+  getModel: function(name) {
+    return mongoose.model(name);
   }
 }
