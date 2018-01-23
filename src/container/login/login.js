@@ -48,6 +48,7 @@ class Login extends Component {
               onChange={v => this.handleChange('user', v)}>
               Username</InputItem>
             <InputItem
+              type="password"
               onChange={v => this.handleChange('pwd', v)}>
               Password</InputItem>
           </List>
