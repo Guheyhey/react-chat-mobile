@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List, InputItem, Radio, WhiteSpace, Button } from 'antd-mobile';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Logo from '../../component/logo/logo';
 import { register } from '../../redux/user.redux';
@@ -42,6 +43,8 @@ class Register extends Component {
     const { type } = this.state;
     return (
       <div>
+        {/* redirectTo comes from redux state.user */}
+        { this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null }
         <Logo></Logo>
         <List>
           { this.props.msg ? <p className="error-msg">{this.props.msg}</p> : null }
@@ -71,12 +74,12 @@ class Register extends Component {
           <RadioItem
             checked={type === 'genius'}
             onChange={() => this.handleChange('type', 'genius')}>
-            I am employee
+            I am an employee
           </RadioItem>
           <RadioItem
             checked={type === 'boss'}
             onChange={() => this.handleChange('type', 'boss')}>
-            I am employer
+            I am an employer
           </RadioItem>
 
           <WhiteSpace />

@@ -19,18 +19,16 @@ const store = createStore(reducers, composeEnhancers(
   applyMiddleware(thunk)
 ));
 
-const Boss = () => <h2>BOSS</h2>;
 
 ReactDOM.render(
   (<Provider store={store}>
     <BrowserRouter>
       <div>
         <AuthRoute></AuthRoute>
-        <Route path="/boss" component={Boss}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Register}></Route>
       </div>
     </BrowserRouter>
-  </Provider>), 
+  </Provider>),
   document.getElementById('root'));
 registerServiceWorker();
