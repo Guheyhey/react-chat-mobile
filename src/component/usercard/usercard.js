@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Card, WhiteSpace,WingBlank} from 'antd-mobile'
+import { Card, WhiteSpace, WingBlank } from 'antd-mobile'
 
 class UserCard extends React.Component{
 	static propTypes = {

@@ -54,13 +54,15 @@ class Dashboard extends React.Component {
 				component:User
 			}
 		]
-
+		const item = navList.find(v => v.path === pathname);
+		// style={{marginTop: 45}}
     return (
       <div>
-        <NavBar className='fixed-header'>
-          {navList.find(v => v.path === pathname).title}
+        <NavBar className='fixed-header' mode='dard'>
+          {/*navList.find(v => v.path === pathname).title*/}
+					{ !item ? 'Error Routing' : item.title }
         </NavBar>
-        <div style={{marginTop: 45}}>
+        <div >
           <Switch>
             {
               navList.map(v => (
