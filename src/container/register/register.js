@@ -24,8 +24,8 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    console.log("props", this.props);
-    console.log("state", this.state);
+    // console.log("props", this.props);
+    // console.log("state", this.state);
   }
 
   handleChange (key, val) {
