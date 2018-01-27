@@ -5,19 +5,21 @@ import { Redirect } from 'react-router-dom';
 
 import { login } from '../../redux/user.redux';
 import Logo from '../../component/logo/logo';
+import appForm from '../../component/app-form/app-form';
 
 @connect(
   state => state.user,
   { login }
 )
+@appForm
 class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      user: '',
-      pwd: ''
-    }
+    // this.state = {
+    //   user: '',
+    //   pwd: ''
+    // }
     this.handleLogin = this.handleLogin.bind(this);
     this.register = this.register.bind(this);
   }
@@ -26,14 +28,14 @@ class Login extends Component {
     this.props.history.push('./register')
   }
 
-  handleChange (key, val) {
-    this.setState({
-      [key]: val
-    })
-  }
+  // handleChange (key, val) {
+  //   this.setState({
+  //     [key]: val
+  //   })
+  // }
 
   handleLogin () {
-    this.props.login(this.state);
+    this.props.login(this.props.state);
   }
 
   render () {
@@ -46,11 +48,11 @@ class Login extends Component {
           <List>
           { this.props.msg ? <p className="error-msg">{this.props.msg}</p> : null }
             <InputItem
-              onChange={v => this.handleChange('user', v)}>
+              onChange={v => this.props.handleChange('user', v)}>
               Username</InputItem>
             <InputItem
               type="password"
-              onChange={v => this.handleChange('pwd', v)}>
+              onChange={v => this.props.handleChange('pwd', v)}>
               Password</InputItem>
           </List>
           <WhiteSpace></WhiteSpace>
