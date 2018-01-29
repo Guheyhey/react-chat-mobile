@@ -3,6 +3,7 @@ const utils = require('utility');
 const Router = express.Router();
 const model = require('./model');
 const User = model.getModel('user');
+const Chat = model.getModel('chat');
 
 // not display password and __v after mongoDB query
 const _filter = {'pwd': 0, '__v': 0};
@@ -13,6 +14,16 @@ Router.get('/list', function (req, res) {
   const { type } = req.query;
   User.find({type: type}, _filter, function(err, doc) {
     return res.json({code: 0, data: doc})
+  })
+})
+
+Router.get('/getMsgList', function(req, res) {
+  const user = req.cookies.user;//注意是 cookies
+  // '$or': [{from: user, to: user}]
+  Chat.find({}, function(err, doc) {
+    if (!err) {
+      return res.json({code: 0, msgs: doc})
+    }
   })
 })
 

@@ -25,7 +25,14 @@ const models = {
     'money': {type: String}
   },
   chat: {
-
+    //  当前对话的 id, 不是单挑message的 id
+    'chatid': {type: String, require: true},
+    'from': {type: String, require: true},
+    'to': {type: String, require: true},
+    // read 仅对 to 有效
+    'read': {type: Boolean, default: false},
+    'content': {type: String, require: true, default: ''},
+    'create_time': {type: Number, default: new Date().getTime()}
   }
 }
 
