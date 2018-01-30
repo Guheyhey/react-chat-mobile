@@ -17,12 +17,15 @@ import GeniusInfo from './container/geniusinfo/geniusinfo';
 import Dashboard from './component/dashboard/dashboard';
 import Chat from './component/chat/chat';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(reducers, composeEnhancers(
-  applyMiddleware(thunk)
-));
-
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//
+// const store = createStore(reducers, composeEnhancers(
+//   applyMiddleware(thunk)
+// ));
+const store = createStore(reducers, compose(
+	applyMiddleware(thunk),
+	window.devToolsExtension?window.devToolsExtension():f=>f
+))
 
 ReactDOM.render(
   (<Provider store={store}>

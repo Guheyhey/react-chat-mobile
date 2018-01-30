@@ -8,6 +8,7 @@ const Chat = model.getModel('chat');
 // not display password and __v after mongoDB query
 const _filter = {'pwd': 0, '__v': 0};
 
+// Chat.remove({}, function(a,b){})
 
 Router.get('/list', function (req, res) {
   // User.remove({}, function(e, d) {});

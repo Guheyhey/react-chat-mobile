@@ -7,6 +7,7 @@ import NavLinkBar from '../navlink/navlink';
 import Boss from '../../component/boss/boss';
 import Genius from '../../component/genius/genius';
 import User from '../../component/user/user';
+import { getMsgList, sendMsg, recvMsg } from '../../redux/chat.redux';
 
 function Msg(){
 	return <h2>消息列表页面</h2>
@@ -14,9 +15,15 @@ function Msg(){
 
 
 @connect(
-  state => state
+  state => state,
+	{ getMsgList, recvMsg }
 )
 class Dashboard extends React.Component {
+
+	componentDidMount() {
+		this.props.getMsgList();
+		this.props.recvMsg();
+	}
 
   render () {
     const {pathname} = this.props.location;
@@ -57,7 +64,7 @@ class Dashboard extends React.Component {
 		//
     return (
       <div>
-        <NavBar className='fixed-header' mode='dard'>
+        <NavBar className='fixed-header' mode='dark'>
           {/*navList.find(v => v.path === pathname).title*/}
 					{ !item ? 'Error Routing' : item.title }
         </NavBar>
