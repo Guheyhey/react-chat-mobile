@@ -25,11 +25,16 @@ Router.get('/getMsgList', function(req, res) {
     userdoc.forEach(v => {
       users[v._id] = {name: v.user, avatar: v.avatar}
     })
-    Chat.find({'$or': [{from: user, to: user}]}, function(err, doc) {
-      if (!err) {
-        return res.json({code: 0, msgs: doc, users: users})
-      }
-    })
+    // Chat.find({'$or': [{from: user, to: user}]}, function(err, doc) {
+    //   if (!err) {
+    //     return res.json({code: 0, msgs: doc, users: users})
+    //   }
+    // })
+    Chat.find({'$or':[{from:user},{to:user}]}, function(err,doc) {
+			if (!err) {
+				return res.json({code: 0, msgs: doc, users: users})
+			}
+		})
   })
   // '$or': [{from: user, to: user}]
 
