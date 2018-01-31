@@ -3,10 +3,12 @@ const utils = require('utility');
 const Router = express.Router();
 const model = require('./model');
 const User = model.getModel('user');
+const Chat = model.getModel('chat');
 
 // not display password and __v after mongoDB query
 const _filter = {'pwd': 0, '__v': 0};
 
+// Chat.remove({}, function(a,b){})
 
 Router.get('/list', function (req, res) {
   // User.remove({}, function(e, d) {});
@@ -14,6 +16,28 @@ Router.get('/list', function (req, res) {
   User.find({type: type}, _filter, function(err, doc) {
     return res.json({code: 0, data: doc})
   })
+})
+
+Router.get('/getMsgList', function(req, res) {
+  const user = req.cookies.userid;//注意是 cookies
+  User.find({}, function(err, userdoc) {
+    let users = {};
+    userdoc.forEach(v => {
+      users[v._id] = {name: v.user, avatar: v.avatar}
+    })
+    // Chat.find({'$or': [{from: user, to: user}]}, function(err, doc) {
+    //   if (!err) {
+    //     return res.json({code: 0, msgs: doc, users: users})
+    //   }
+    // })
+    Chat.find({'$or':[{from:user},{to:user}]}, function(err,doc) {
+			if (!err) {
+				return res.json({code: 0, msgs: doc, users: users})
+			}
+		})
+  })
+  // '$or': [{from: user, to: user}]
+
 })
 
 Router.post('/update', function (req, res) {
